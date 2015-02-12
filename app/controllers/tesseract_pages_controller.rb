@@ -1,10 +1,10 @@
 class TesseractPagesController < ApplicationController
   skip_before_filter :verify_authenticity_token 
   def run
-
+    require 'open-uri'
   	puts "In Run Controller"
 
-    jpg = Base64.decode64(params[:image]);
+    jpg = open("http://patentimages.storage.googleapis.com/" + params[:image] + ".png").read
     
     puts "Creating directory"
     %x(mkdir tessdir)
