@@ -13,7 +13,7 @@ class TesseractPagesController < ApplicationController
     file = File.open("tessdir/sample.jpg",'wb')
   	file.write jpg
 	  
-    puts "Starting tesseract"
+    puts "Starting tesseract up"
     %x(tesseract tessdir/sample.jpg tessdir/out -l #{params[:language]})
     
     puts "Reading result"
