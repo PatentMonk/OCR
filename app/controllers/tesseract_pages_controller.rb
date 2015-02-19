@@ -4,7 +4,7 @@ class TesseractPagesController < ApplicationController
     require 'open-uri'
   	puts "In Run Controller"
 
-    jpg = open("http://patentimages.storage.googleapis.com/" + params[:image] + ".png").read
+    jpg = open("http://patentimages.storage.googleapis.com/#{params[:image]}.png").read
     
     puts "Creating directory"
     %x(mkdir tessdir)
@@ -13,7 +13,7 @@ class TesseractPagesController < ApplicationController
     file = File.open("tessdir/sample.jpg",'wb')
   	file.write jpg
 	  
-    puts "Starting tesseract up"
+    puts "Starting tesseract"
     %x(tesseract tessdir/sample.jpg tessdir/out -l #{params[:language]})
     
     puts "Reading result"
