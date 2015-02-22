@@ -7,9 +7,9 @@ class TesseractPagesController < ApplicationController
       file = File.open("tessdir/#{f.split('/')[0]}.jpg",'wb')
       file.write open("http://patentimages.storage.googleapis.com/#{f}.png").read
       
-      %x(tesseract tessdir/#{f.split('/')[0]}.jpg tessdir/out)
+      %x(tesseract tessdir/#{f.split('/')[0]}.jpg tessdir/#{f.split('/')[0]})
       
-      file = File.open("tessdir/out.txt", "rb")
+      file = File.open("tessdir/#{f.split('/')[0]}.txt", "rb")
       contents << {"#{i}" => file.read.scan(/\d{3}|Fig[ .]{1,}\d{1,}|Figure[ .]{1,}/i).uniq}
     end
     
