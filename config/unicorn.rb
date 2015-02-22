@@ -1,5 +1,5 @@
 worker_processes Integer(3)
-timeout 15
+timeout 35
 preload_app true
 
 before_fork do |server, worker|
