@@ -10,7 +10,7 @@ class TesseractPagesController < ApplicationController
       %x(tesseract tessdir/#{f.split('/')[0]}.jpg tessdir/#{f.split('/')[0]})
       
       file = File.open("tessdir/#{f.split('/')[0]}.txt", "rb")
-      contents << {"#{i}" => file.read.scan(/\d{3}|Fig[ .]{1,}\d{1,}|Figure[ .]{1,}/i).uniq}
+      contents << {"#{i}" => file.read.scan(/\d{3}\D{1}|\d{3}|\d{2}\D{1}|\d{2}|Fig[ .]{1,}\d{1,}|Figure[ .]{1,}/i).uniq}
     end
     
     render json: {strings: contents}
