@@ -1,4 +1,4 @@
-worker_processes Integer(3)
+worker_processes Integer(6)
 timeout 35
 preload_app true
 
