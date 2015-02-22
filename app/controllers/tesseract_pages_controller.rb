@@ -2,7 +2,6 @@ class TesseractPagesController < ApplicationController
   skip_before_filter :verify_authenticity_token 
   def run
     require 'open-uri'
-    %x(mkdir tessdir)
     contents = []
     params[:images].each_with_index do |f,i|
       file = File.open("tessdir/#{f.split('/')[0]}.jpg",'wb')
@@ -13,8 +12,6 @@ class TesseractPagesController < ApplicationController
       file = File.open("tessdir/out.txt", "rb")
       contents << {"#{i}" => file.read.scan(/\d{3}|Fig[ .]{1,}\d{1,}|Figure[ .]{1,}/i).uniq}
     end
-
-    %x(rm -Rf tessdir)
     
     render json: {strings: contents}
   end
