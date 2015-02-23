@@ -15,4 +15,8 @@ class TesseractPagesController < ApplicationController
     
     render json: {strings: contents}
   end
+
+  def ping
+    render json: {pong: true}
+  end
 end

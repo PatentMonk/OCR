@@ -1,5 +1,6 @@
 OcrApp::Application.routes.draw do
   post "tesseract_pages/run"
+  get '/ping', to: "tesseract_pages#ping"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
