@@ -19,5 +19,6 @@ after_fork do |server, worker|
 
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
-  %x(mkdir tessdir)
 end
+
+%x(mkdir tessdir)

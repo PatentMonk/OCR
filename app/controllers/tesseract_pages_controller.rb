@@ -13,7 +13,7 @@ class TesseractPagesController < ApplicationController
       end
       
       file = File.open("tessdir/#{f.split('/')[1]}.txt", "rb")
-      contents << {"#{i}" => file.read.split("\n").uniq.join(',').scan(/\d{3}[a-zA-Z]{1}|\d{3}|\d{2}[a-zA-Z]{1}|\d{2}|Fig[ .]{1,}\d{1,}|Figure[ .]{1,}/i).uniq}
+      contents << {"#{i}" => file.read.split("\n").uniq.join(',').scan(/\d{3}[a-zA-Z]{1}|\d{3}|\d{2}[a-zA-Z]{1}|\d{2}|Fig[ .]{1,}\d{1,}[a-zA-Z]{0,}|Figure[ .]{1,}/i).uniq}
     end
     
     render json: {strings: contents}
