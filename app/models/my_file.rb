@@ -19,10 +19,10 @@ class MyFile
       file.write(contents.to_json)
     end
     if contents.present?
-      create_s3("#{f.split('/')[0]}.json")
+      create_s3("#{images[0].split('/')[0]}.json")
     end
-    %x(rm -f -r /tmp/#{f.split('/')[1]}.txt)
-    %x(rm -f -r /tmp/#{f.split('/')[0]}.json)
+    %x(rm -fr /tmp/#{images[0].split('/')[1]}.txt)
+    %x(rm -fr /tmp/#{images[0].split('/')[0]}.json)
     contents.to_json
   end
 
