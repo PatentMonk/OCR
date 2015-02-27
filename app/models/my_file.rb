@@ -7,7 +7,7 @@ class MyFile
     images.each_with_index do |f,i|
 
       file = File.open("tessdir/#{f.split('/')[1]}.jpg",'wb')
-      file.write open(f).read
+      file.write open("https:#{f}").read
       
       %x(tesseract tessdir/#{f.split('/')[1]}.jpg tessdir/#{f.split('/')[1]})
       
