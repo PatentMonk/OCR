@@ -9,7 +9,7 @@ class MyFile
       images.each_with_index do |f,i|
 
         file = File.open("tessdir/#{patent}-#{i}.jpg",'wb')
-        file.write open(f).read
+        file.write open("https:#{f}").read
 
         %x(tesseract tessdir/#{patent}-#{i}.jpg tessdir/#{patent}-#{i})
 
