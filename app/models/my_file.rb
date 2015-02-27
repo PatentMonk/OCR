@@ -1,28 +1,29 @@
 class MyFile
 
-  def self.tesseract(images)
+  def self.tesseract(patent,images)
     require 'open-uri'
     contents = []
 
     images.each_with_index do |f,i|
 
-      file = File.open("tessdir/#{f.split('/')[1]}.jpg",'wb')
+      file = File.open("tessdir/#{patent}-#{i}.jpg",'wb')
       file.write open("https:#{f}").read
       
-      %x(tesseract tessdir/#{f.split('/')[1]}.jpg tessdir/#{f.split('/')[1]})
+      %x(tesseract tessdir/#{patent}-#{i}.jpg tessdir/#{patent}-#{i})
       
-      file = File.open("tessdir/#{f.split('/')[1]}.txt", "rb")
+      file = File.open("tessdir/#{patent}-#{i}.txt", "rb")
       contents << {"#{i}" => file.read.split("\n").uniq.join(',').scan(/\d{3}[a-zA-Z]{1}|\d{3}|\d{2}[a-zA-Z]{1}|\d{2}|Fig[ .]{1,}\d{1,}[a-zA-Z]{0,}|Figure[ .]{1,}/i).uniq}
+      %x(rm -fr tessdir/#{patent}-#{i}.txt)
     end
 
-    File.open("tessdir/#{f.split('/')[0]}.json", 'w') do |file| 
+    File.open("tessdir/#{patent}.json", 'w') do |file| 
       file.write(contents.to_json)
     end
     if contents.present?
-      create_s3("#{images[0].split('/')[0]}.json")
+      create_s3("#{patent}.json")
     end
-    %x(rm -fr tessdir/#{images[0].split('/')[1]}.txt)
-    %x(rm -fr tessdir/#{images[0].split('/')[0]}.json)
+
+    %x(rm -fr tessdir/#{patent}.json)
     contents.to_json
   end
 

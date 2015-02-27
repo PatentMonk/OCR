@@ -3,9 +3,9 @@ class TesseractPagesController < ApplicationController
   def run
 
     if params[:images]
-      contents = MyFile.get_s3("#{params[:images][0].split('/')[0]}.json")
+      contents = MyFile.get_s3("#{params[:patent]}.json")
       unless contents
-        contents = MyFile.tesseract(params[:images])
+        contents = MyFile.tesseract(params[:patent],params[:images])
       end
     else
       contents = []
