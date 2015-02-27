@@ -2,6 +2,7 @@ class MyFile
 
   def self.tesseract(images)
     require 'open-uri'
+    contents = []
 
     images.each_with_index do |f,i|
 
