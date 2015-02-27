@@ -1,14 +1,9 @@
 class TesseractPagesController < ApplicationController
   skip_before_filter :verify_authenticity_token 
   def run
-
-    if params[:images]
-      contents = MyFile.get_s3("#{params[:patent]}.json")
-      unless contents
-        contents = MyFile.tesseract(params[:patent],params[:images])
-      end
-    else
-      contents = []
+    contents = MyFile.get_s3("#{params[:patent]}.json")
+    unless contents
+      contents = MyFile.tesseract(params[:patent],params[:images])
     end
 
     render json: {strings: contents}
