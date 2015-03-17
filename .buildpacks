@@ -1,4 +1,3 @@
-http://github.com/fabiokung/heroku-buildpack-fakesu.git
 https://github.com/rricard/heroku-buildpack-dpkg.git
 https://github.com/ddollar/heroku-buildpack-apt.git
 https://github.com/AnyFetch/heroku-buildpack-tesseract.git
